@@ -23,6 +23,14 @@ namespace Quanti.Utils.Helpers
             }
         }
 
+        public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, System.Globalization.CultureInfo cultureInfo) where T : struct, IConvertible, IComparable
+        {
+            ArgumentChecker.ThrowIfNull(resourcesManager, nameof(resourcesManager));
+            ArgumentChecker.ThrowIfNull(cultureInfo, nameof(cultureInfo));
+
+            return GetLocalizations<T>(resourcesManager, defaultValueToIgnore: null, cultureInfo: cultureInfo);
+        }
+
         /// <summary>
         /// Gets localized texts for values of enum type by using specified instance of <see cref="ResourceManager"/>.
         /// </summary>
@@ -30,13 +38,16 @@ namespace Quanti.Utils.Helpers
         /// <param name="resourcesManager"></param>
         /// <param name="defaultValueToIgnore">Value to be filtered from return collection. This way null can be used instead default value.</param>
         /// <returns></returns>
-        public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, Nullable<T> defaultValueToIgnore = null) where T : struct, IConvertible, IComparable
+        public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, Nullable<T> defaultValueToIgnore = null, System.Globalization.CultureInfo cultureInfo = null) where T : struct, IConvertible, IComparable
         {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException($"Type '{typeof(T).FullName}' is not enum type!");
+            ArgumentChecker.ThrowIfNull(resourcesManager, nameof(resourcesManager));
 
-            var prefix = typeof(T).Name;
-            var values = Enum.GetValues(typeof(T));
+            var type = typeof(T);
+            if (!type.IsEnum)
+                throw new InvalidOperationException($"Type '{type.FullName}' is not enum type!");
+
+            var prefix = type.Name;
+            var values = Enum.GetValues(type);
 
             var texts = new List<TextValue<T>>();
             foreach (T value in values)
@@ -45,9 +56,25 @@ namespace Quanti.Utils.Helpers
                 if (value.CompareTo(defaultValueToIgnore) == 0)
                     continue;
 
-                var name = Enum.GetName(typeof(T), value);
+                var name = Enum.GetName(type, value);
                 var resourceName = $"{prefix}_{name}";
-                var text = resourcesManager.GetString(resourceName);
+
+                object resource;
+                string text;
+                if (cultureInfo == null)
+                {
+                    resource = resourcesManager.GetObject(resourceName);
+                    text = resourcesManager.GetString(resourceName);
+                }
+                else
+                {
+                    resource = resourcesManager.GetObject(resourceName, cultureInfo);
+                    text = resourcesManager.GetString(resourceName, cultureInfo);
+                }
+
+                // when resource does not exists for the value return name of the value.
+                if (resource == null)
+                    text = name;
 
                 texts.Add(new TextValue<T>(value, text));
             }
