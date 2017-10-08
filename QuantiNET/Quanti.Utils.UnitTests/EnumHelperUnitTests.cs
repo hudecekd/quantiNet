@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Globalization;
+using System.ComponentModel.DataAnnotations;
+using Quanti.Utils.Extensions;
 
 namespace Quanti.Utils.UnitTests
 {
@@ -19,6 +21,15 @@ namespace Quanti.Utils.UnitTests
         private enum TestEnum2Type
         {
             Value
+        }
+
+        private const string DisplayAttributeName = "Test value 1";
+
+        private enum TestEnumDisplayAttributeType
+        {
+            [Display(Name =DisplayAttributeName)]
+            Value1,
+            Value2
         }
 
         /// <summary>
@@ -68,5 +79,18 @@ namespace Quanti.Utils.UnitTests
             Assert.IsTrue(localization.Text == resourceText);
         }
 
+        [TestMethod]
+        public void TestDisplayAttribute()
+        {
+            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizationsByDisplayAttribute<TestEnumDisplayAttributeType>();
+        }
+
+        [TestMethod]
+        public void TestDisplayAttributeExtension()
+        {
+            var value = TestEnumDisplayAttributeType.Value1;
+            var text = value.GetNameFromDisplayAttribute();
+            Assert.IsTrue(text == DisplayAttributeName);
+        }
     }
 }
