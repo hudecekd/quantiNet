@@ -14,7 +14,7 @@ namespace Quanti.Utils.Extensions
            where TAttribute : Attribute
         {
             return enumValue.GetType()
-                            .GetMember(enumValue.ToString())
+                            .GetTypeInfo().GetMembers()
                             .First()
                             .GetCustomAttribute<TAttribute>();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Quanti.Utils
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNotEnum<T>()
         {
-            if (!typeof(T).IsEnum)
+            if (!typeof(T).GetTypeInfo().IsEnum)
                 throw new InvalidOperationException($"Type '{typeof(T).FullName} is not an enum!");
         }
     }

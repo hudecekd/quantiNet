@@ -60,6 +60,21 @@ namespace Quanti.Utils.Helpers
                 var name = Enum.GetName(type, value);
                 var resourceName = $"{prefix}_{name}";
 
+#if NETSTANDARD1_6
+                string text;
+                if (cultureInfo == null)
+                {
+                    text = resourcesManager.GetString(resourceName);
+                }
+                else
+                {
+                    text = resourcesManager.GetString(resourceName, cultureInfo);
+                }
+
+                // when resource does not exists for the value return name of the value.
+                if (text == null)
+                    text = name;
+#else
                 object resource;
                 string text;
                 if (cultureInfo == null)
@@ -76,6 +91,7 @@ namespace Quanti.Utils.Helpers
                 // when resource does not exists for the value return name of the value.
                 if (resource == null)
                     text = name;
+#endif
 
                 texts.Add(new TextValue<T>(value, text));
             }
