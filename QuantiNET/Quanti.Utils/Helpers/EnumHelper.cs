@@ -9,22 +9,52 @@ using System.Threading.Tasks;
 
 namespace Quanti.Utils.Helpers
 {
+    /// <summary>
+    /// Represents helper class for an enum type.
+    /// </summary>
     public static class EnumHelper
     {
-        public class TextValue<T>
+        /// <summary>
+        /// Represents localization of enum value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public sealed class TextValue<T>
         {
+            /// <summary>
+            /// Represents value of enum type.
+            /// </summary>
             public T Value { get; set; }
+            /// <summary>
+            /// Localization of value of an enum type.
+            /// </summary>
             public string Text { get; set; }
 
-            public TextValue() { }
+            /// <summary>
+            /// Creates object representing localization of value of enum type.
+            /// It can be created only by methods in <see cref="EnumHelper"/> class.
+            /// </summary>
+            internal TextValue() { }
 
-            public TextValue(T value, string text)
+            /// <summary>
+            /// Creates object representing localization of value of an enum type.
+            /// It can be created only by methods in <see cref="EnumHelper"/> class.
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="text"></param>
+            internal TextValue(T value, string text)
             {
                 this.Value = value;
                 this.Text = text;
             }
         }
 
+        /// <summary>
+        /// Gets localized texts for enum values.
+        /// </summary>
+        /// <typeparam name="T">Enum type for which values to get localized texts.</typeparam>
+        /// <param name="resourcesManager">Resource manager which contains texts which should be used to localize an enum values.</param>
+        /// <param name="cultureInfo">Culture info to be used for localization.</param>
+        /// <returns></returns>
         public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, System.Globalization.CultureInfo cultureInfo) where T : struct, IComparable, IFormattable, IConvertible
         {
             ArgumentChecker.ThrowIfNull(resourcesManager, nameof(resourcesManager));
@@ -40,6 +70,7 @@ namespace Quanti.Utils.Helpers
         /// <typeparam name="T"></typeparam>
         /// <param name="resourcesManager"></param>
         /// <param name="defaultValueToIgnore">Value to be filtered from return collection. This way null can be used instead default value.</param>
+        /// <param name="cultureInfo">Culture for which to get localization text. If not present then current culture of thread is used.</param>
         /// <returns></returns>
         public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, Nullable<T> defaultValueToIgnore = null, System.Globalization.CultureInfo cultureInfo = null) where T : struct, IComparable, IFormattable, IConvertible
         {

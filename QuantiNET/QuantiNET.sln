@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quanti.Utils", "Quanti.Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quanti.Utils.UnitTests", "Quanti.Utils.UnitTests\Quanti.Utils.UnitTests.csproj", "{43650B97-0A5C-4F16-B72A-CE555E0A429A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quanti.WPF.Utils", "Quanti.WPF.Utils\Quanti.WPF.Utils.csproj", "{5B5CFE63-26CB-4434-B7D8-5B9CF1DF3B7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{43650B97-0A5C-4F16-B72A-CE555E0A429A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43650B97-0A5C-4F16-B72A-CE555E0A429A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43650B97-0A5C-4F16-B72A-CE555E0A429A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B5CFE63-26CB-4434-B7D8-5B9CF1DF3B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B5CFE63-26CB-4434-B7D8-5B9CF1DF3B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B5CFE63-26CB-4434-B7D8-5B9CF1DF3B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B5CFE63-26CB-4434-B7D8-5B9CF1DF3B7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

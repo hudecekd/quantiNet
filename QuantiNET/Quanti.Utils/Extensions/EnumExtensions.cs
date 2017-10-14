@@ -8,13 +8,21 @@ using System.Threading.Tasks;
 
 namespace Quanti.Utils.Extensions
 {
+    /// <summary>
+    /// Represents class which contains extension methods for values of enum type.
+    /// </summary>
     public static class EnumExtensions
     {
-        public static TAttribute GetAttribute<TAttribute>(this Enum enumValue)
-           where TAttribute : Attribute
+        /// <summary>
+        /// Gets an attribute for a value of an enum type. If attributes is not present then exceptions is thrown.
+        /// </summary>
+        /// <typeparam name="TAttribute">Attribute to be retrieved.</typeparam>
+        /// <param name="enumValue">Enum value for which attribute should be retrieved.</param>
+        /// <returns></returns>
+        public static TAttribute GetAttribute<TAttribute>(this Enum enumValue) where TAttribute : Attribute
         {
             return enumValue.GetType()
-                            .GetTypeInfo().GetMembers()
+                            .GetMember(enumValue.ToString())
                             .First()
                             .GetCustomAttribute<TAttribute>();
         }
