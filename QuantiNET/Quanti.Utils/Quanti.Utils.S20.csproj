@@ -3,10 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <BaseIntermediateOutputPath>obj.S20</BaseIntermediateOutputPath>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;NETSTANDARD1_6</DefineConstants>
+    <OutputPath>bin.S20\Debug\netstandard1.6\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin.S20\Release\netstandard1.6\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
