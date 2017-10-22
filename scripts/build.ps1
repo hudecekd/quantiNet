@@ -22,9 +22,9 @@ Invoke-Expression ".\nuget pack QuantiNET\Quanti.WPF.Utils\Quanti.WPF.Utils.cspr
 Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.Utils.*.nupkg"
 Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.WPF.Utils.*.nupkg"
 
-# It looks that there is a BUG in msbuild. When default folder is changed from bin to bin.S20 we can see in VS that there are
-# two netstandard1.6 folders even when in csproj is only one! So we have to use it to locate nuget package.
-Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey QuantiNET\Quanti.Utils\bin.S20\$configuration\netstandard1.6\Quanti.Utils.S20.*.nupkg"
+# When defualt bin folder is not changed msbuild adds netstandard folder by default. When it is changed we need to delete it so it behaves correctly
+# and nuget packages is in "$configuration" folder.
+Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey QuantiNET\Quanti.Utils\bin.S20\$configuration\Quanti.Utils.S20.*.nupkg"
 
 # does not work correctly when called here. It looks that msbuild is still running because it keeps some files and directories there.
 # When called manually later it works.
