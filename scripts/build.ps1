@@ -1,9 +1,13 @@
-[string] $nexusUrl = "http://localhost:8081/repository/quantiNET/"
-[string] $apiKey = "ec177692-4594-3d56-896b-1f3bb95e08ce"
+[string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
 [string] $configuration = "Release"
 
 # nuget properties
 [string] $licenseUrl = "http://www.quanti.cz"
+
+# get api key for current user. Each user has his own api key stored in apiKey.txt file which is not pushed go GIT but saved locally!
+[string] $apiKeyPath = (Get-Location).Path
+$apiKeyPath = $apiKeyPath + "\..\..\nugetApiKey.txt"
+[string] $apiKey = [System.IO.File]::ReadAllText($apiKeyPath)
 
 # go to root folder
 cd ..
@@ -18,7 +22,7 @@ msbuild /p:Configuration=$configuration QuantiNET\QuantiNET.sln
 Invoke-Expression ".\nuget pack QuantiNET\Quanti.Utils\Quanti.Utils.csproj -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
 Invoke-Expression ".\nuget pack QuantiNET\Quanti.WPF.Utils\Quanti.WPF.Utils.csproj -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
 
-# TODO: is there a better way to delete nupkg files? Somehow specify exact path without '*'?
+# TODO: is there a better way to locate nupkg files? Somehow specify exact path without '*'?
 Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.Utils.*.nupkg"
 Invoke-Expression ".\nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.WPF.Utils.*.nupkg"
 
