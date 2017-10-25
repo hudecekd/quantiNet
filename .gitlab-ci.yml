@@ -1,6 +1,10 @@
 before_script:
   - echo "before script"
 build_job:
+  only:
+    - web
   script: "powershell -file build.ps1"
 clean_job:
+  only:
+    - web
   script: "powershell -file clean.ps1"
