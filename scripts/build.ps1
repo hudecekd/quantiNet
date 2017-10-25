@@ -7,7 +7,6 @@
 
 # get api key for current user. Each user has his own api key stored in apiKey.txt file which is not pushed go GIT but saved locally!
 [string] $apiKeyPath = "c:\nuget\nugetApiKey.txt"
-$apiKeyPath = $apiKeyPath + "\..\..\nugetApiKey.txt"
 [string] $apiKey = [System.IO.File]::ReadAllText($apiKeyPath)
 
 # go to root folder
