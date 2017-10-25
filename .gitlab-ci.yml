@@ -1,0 +1,6 @@
+before_script:
+  - echo "before script"
+build_job:
+  script: "powershell -file build.ps1"
+clean_job:
+  script: "powershell -file clean.ps1"
