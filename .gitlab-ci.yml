@@ -3,7 +3,9 @@ before_script:
 build_job:
   only:
     - web
-  script: "powershell -file .\\scripts\\build.ps1"
+  script:
+    - cd .\\scripts
+    - "powershell -file .\\build.ps1"
   when: manual
 clean_job:
   only:
