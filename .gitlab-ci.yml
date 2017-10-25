@@ -3,8 +3,8 @@ before_script:
 build_job:
   only:
     - web
-  script: "powershell -file build.ps1"
+  script: "powershell -file .\scripts\build.ps1"
 clean_job:
   only:
     - web
-  script: "powershell -file clean.ps1"
+  script: "powershell -file .\scripts\clean.ps1"
