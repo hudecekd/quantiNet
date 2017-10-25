@@ -4,7 +4,9 @@ build_job:
   only:
     - web
   script: "powershell -file .\\scripts\\build.ps1"
+  when: manual
 clean_job:
   only:
     - web
   script: "powershell -file .\\scripts\\clean.ps1"
+  when: manual
