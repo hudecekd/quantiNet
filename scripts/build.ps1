@@ -1,13 +1,8 @@
-[string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
 [string] $configuration = "Release"
 [string] $nuget = "c:\nuget\4.4.0\nuget.exe"
 
 # nuget properties
 [string] $licenseUrl = "http://www.quanti.cz"
-
-# get api key for current user. Each user has his own api key stored in apiKey.txt file which is not pushed go GIT but saved locally!
-[string] $apiKeyPath = "c:\nuget\nugetApiKey.txt"
-[string] $apiKey = [System.IO.File]::ReadAllText($apiKeyPath)
 
 # go to root folder
 cd ..

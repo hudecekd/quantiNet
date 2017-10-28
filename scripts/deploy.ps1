@@ -1,4 +1,12 @@
-﻿# go to root directory
+﻿[string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
+[string] $configuration = "Release"
+[string] $nuget = "c:\nuget\4.4.0\nuget.exe"
+
+# get api key for current user. Each user has his own api key stored in apiKey.txt file which is not pushed go GIT but saved locally!
+[string] $apiKeyPath = "c:\nuget\nugetApiKey.txt"
+[string] $apiKey = [System.IO.File]::ReadAllText($apiKeyPath)
+
+# go to root directory
 cd ..
 
 # TODO: is there a better way to locate nupkg files? Somehow specify exact path without '*'?
