@@ -1,3 +1,9 @@
+# does not work correctly when called here. It looks that msbuild is still running because it keeps some files and directories there.
+# When called manually later it works.
+# We want 'clean' script to be able to work alone. We change directory so it looks from the 'clean' script perspective that working directory is the same as script's location
+# and then it is up to script to change directory if it is needed.
+
+
 # go to root folder
 cd ..
 

@@ -29,10 +29,3 @@ Invoke-Expression "$nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.WPF.Uti
 # When defualt bin folder is not changed msbuild adds netstandard folder by default. When it is changed we need to delete it so it behaves correctly
 # and nuget packages is in "$configuration" folder.
 Invoke-Expression "$nuget push -Source $nexusUrl -ApiKey $apiKey QuantiNET\Quanti.Utils\bin.S20\$configuration\Quanti.Utils.S20.*.nupkg"
-
-# does not work correctly when called here. It looks that msbuild is still running because it keeps some files and directories there.
-# When called manually later it works.
-# We want 'clean' script to be able to work alone. We change directory so it looks from the 'clean' script perspective that working directory is the same as script's location
-# and then it is up to script to change directory if it is needed.
-cd scripts
-Invoke-Expression ".\clean.ps1"
