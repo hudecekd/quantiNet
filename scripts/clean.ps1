@@ -3,6 +3,7 @@
 # We want 'clean' script to be able to work alone. We change directory so it looks from the 'clean' script perspective that working directory is the same as script's location
 # and then it is up to script to change directory if it is needed.
 
+$ErrorActionPreference = "Stop"
 
 # go to root folder
 cd ..

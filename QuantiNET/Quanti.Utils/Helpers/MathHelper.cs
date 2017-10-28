@@ -8,6 +8,8 @@ namespace Quanti.Utils.Helpers
 { 
     public static class MathHelper
     {
+
+        fdas
         /// <summary>
         /// Converts value to integer if possible. If rounding should be done then exception is thrown.
         /// </summary>

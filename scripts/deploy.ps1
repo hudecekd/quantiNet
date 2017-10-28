@@ -1,4 +1,6 @@
-﻿[string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
+﻿$ErrorActionPreference = "Stop"
+
+[string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
 [string] $configuration = "Release"
 [string] $nuget = "c:\nuget\4.4.0\nuget.exe"
 
