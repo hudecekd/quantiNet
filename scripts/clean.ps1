@@ -9,7 +9,17 @@ $ErrorActionPreference = "Stop"
 cd ..
 
 msbuild /t:Clean QuantiNET\QuantiNET.S20.sln
+if ($LastExitCode -ne -0)
+{
+  echo "Clean of QuantiNET.S20 failed."
+  exit $LastExitCode
+}
 msbuild /t:Clean QuantiNET\QuantiNET.sln
+if ($LastExitCode -ne -0)
+{
+  echo "Clean of QuantiNET failed."
+  exit $LastExitCode
+}
 
 # msbuild still keeps bin, obj folders. We remove them here.
 
