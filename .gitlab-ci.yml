@@ -20,7 +20,9 @@ clean_job:
   stage: clean
   only:
     - web
-  script: "powershell -file .\\scripts\\clean.ps1"
+  script:
+    - cd .\\scripts
+    - "powershell -file .\\clean.ps1"
   when: manual
 
 test_build:
@@ -29,5 +31,5 @@ test_build:
     - web
   script:
     - cd .\\scripts
-    - "powershell -file \\test.ps1"
+    - "powershell -file .\\test.ps1"
   when: manual
