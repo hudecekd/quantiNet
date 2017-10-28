@@ -1,6 +1,13 @@
 before_script:
   - echo "before script"
+
+stages:
+  - build
+  - test
+  - deploy
+
 build_job:
+  stage: build
   only:
     - web
   script:
@@ -11,4 +18,13 @@ clean_job:
   only:
     - web
   script: "powershell -file .\\scripts\\clean.ps1"
+  when: manual
+
+test_build:
+  stage: test
+  only:
+    - web
+  script:
+    - cd .\\scripts
+    - "powershell -file \\test.ps1"
   when: manual
