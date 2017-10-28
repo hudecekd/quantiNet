@@ -5,6 +5,7 @@ stages:
   - build
   - test
   - deploy
+  - clean
 
 build_job:
   stage: build
@@ -14,7 +15,9 @@ build_job:
     - cd .\\scripts
     - "powershell -file .\\build.ps1"
   when: manual
+
 clean_job:
+  stage: clean
   only:
     - web
   script: "powershell -file .\\scripts\\clean.ps1"
