@@ -21,11 +21,3 @@ Invoke-Expression "$nuget restore QuantiNET\QuantiNET.sln"
 msbuild /p:Configuration=$configuration QuantiNET\QuantiNET.sln
 Invoke-Expression "$nuget pack QuantiNET\Quanti.Utils\Quanti.Utils.csproj -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
 Invoke-Expression "$nuget pack QuantiNET\Quanti.WPF.Utils\Quanti.WPF.Utils.csproj -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
-
-# TODO: is there a better way to locate nupkg files? Somehow specify exact path without '*'?
-Invoke-Expression "$nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.Utils.*.nupkg"
-Invoke-Expression "$nuget push -Source $nexusUrl -ApiKey $apiKey  Quanti.WPF.Utils.*.nupkg"
-
-# When defualt bin folder is not changed msbuild adds netstandard folder by default. When it is changed we need to delete it so it behaves correctly
-# and nuget packages is in "$configuration" folder.
-Invoke-Expression "$nuget push -Source $nexusUrl -ApiKey $apiKey QuantiNET\Quanti.Utils\bin.S20\$configuration\Quanti.Utils.S20.*.nupkg"

@@ -16,6 +16,18 @@ build_job:
     - "powershell -file .\\build.ps1"
   when: manual
 
+deploy_job:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - cd .\\scripts
+    - "powershell -file .\\deploy.ps1"
+  when: manual
+  environment:
+    name: repository.quanti.cz
+    url: https://repository.quanti.cz/#browse/browse/components:QuantiNET
+
 clean_job:
   stage: clean
   only:
