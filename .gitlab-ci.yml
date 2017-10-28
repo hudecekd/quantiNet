@@ -27,6 +27,8 @@ clean_job:
 
 test_build:
   stage: test
+  variables:
+    GIT_STRATEGY: none
   only:
     - web
   script:
