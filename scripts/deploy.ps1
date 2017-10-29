@@ -1,8 +1,6 @@
-﻿$ErrorActionPreference = "Stop"
+﻿. .\configuration.ps1
 
 [string] $nexusUrl = "https://repository.quanti.cz/repository/QuantiNET/"
-[string] $configuration = "Release"
-[string] $nuget = "c:\nuget\4.4.0\nuget.exe"
 
 # get api key for current user. Each user has his own api key stored in apiKey.txt file which is not pushed go GIT but saved locally!
 [string] $apiKeyPath = "c:\nuget\nugetApiKey.txt"

@@ -1,4 +1,6 @@
-﻿# go to root folder
+﻿. .\configuration.ps1
+
+# go to root folder
 cd ..
 
 [string] $configuration = "Release"

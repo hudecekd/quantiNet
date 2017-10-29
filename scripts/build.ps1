@@ -1,8 +1,4 @@
-$ErrorActionPreference = "Stop"
-
-[string] $configuration = "Release"
-[string] $nuget = "c:\nuget\4.4.0\nuget.exe"
-
+. .\configuration.ps1
 
 # nuget properties
 [string] $licenseUrl = "http://www.quanti.cz"
