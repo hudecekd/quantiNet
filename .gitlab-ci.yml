@@ -31,6 +31,8 @@ deploy_job:
 
 clean_job:
   stage: clean
+  variables:
+    GIT_STRATEGY: none
   only:
     - branches
     - web
