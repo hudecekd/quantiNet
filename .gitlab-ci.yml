@@ -27,6 +27,7 @@ deploy_job:
   environment:
     name: repository.quanti.cz
     url: https://repository.quanti.cz/#browse/browse/components:QuantiNET
+  allow_failure: false
 
 clean_job:
   stage: clean
