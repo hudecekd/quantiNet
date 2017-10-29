@@ -61,6 +61,8 @@ namespace Quanti.Utils.UnitTests
             var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizations<TestEnumType>(Resources.ResourceManager, defaultValue);
             Assert.IsTrue(localizations.Count() == Enum.GetValues(typeof(TestEnumType)).Length - 1);
             Assert.IsFalse(localizations.Any(l => l.Value == defaultValue));
+
+            Assert.IsTrue(false); // git lab test of handling failure job
         }
 
         [TestMethod]
