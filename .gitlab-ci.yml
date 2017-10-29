@@ -15,7 +15,6 @@ build_job:
   script:
     - cd .\\scripts
     - "powershell -file .\\build.ps1"
-  when: manual
 
 deploy_job:
   stage: deploy
@@ -37,7 +36,6 @@ clean_job:
   script:
     - cd .\\scripts
     - "powershell -file .\\clean.ps1"
-  when: manual
 
 test_build:
   stage: test
@@ -49,4 +47,3 @@ test_build:
   script:
     - cd .\\scripts
     - "powershell -file .\\test.ps1"
-  when: manual
