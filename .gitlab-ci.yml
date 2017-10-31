@@ -17,9 +17,9 @@ build_job:
     - "powershell -file .\\build.ps1"
   artifacts:
     paths:
-      - output\Release\Quanti.Utils.*.nupkg
-      - output\Release\Quanti.WPF.Utils.*.nupkg
-      - output\Release\Quanti.Utils.S20.*.nupkg
+      - .\output\Release\Quanti.Utils.*.nupkg
+      - .\output\Release\Quanti.WPF.Utils.*.nupkg
+      - .\output\Release\Quanti.Utils.S20.*.nupkg
     expire_in: 1 week
 
 deploy_job:
