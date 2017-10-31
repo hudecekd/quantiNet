@@ -15,6 +15,12 @@ build_job:
   script:
     - cd .\\scripts
     - "powershell -file .\\build.ps1"
+  artifacts:
+    paths:
+      - Quanti.Utils.*.nupkg
+      - Quanti.WPF.Utils.*.nupkg
+      - QuantiNET\Quanti.Utils\bin.S20\Release\Quanti.Utils.S20.*.nupkg
+    expire_in: 1 week
 
 deploy_job:
   stage: deploy
