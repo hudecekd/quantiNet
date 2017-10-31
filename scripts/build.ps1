@@ -2,7 +2,6 @@
 
 # nuget properties
 [string] $licenseUrl = "http://www.quanti.cz"
-[string] $outputDirectory = ".\output\$configuration";
 
 # go to root folder
 $currentPathBackup = (Get-Location).Path

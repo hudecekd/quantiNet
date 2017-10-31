@@ -4,6 +4,9 @@ $ErrorActionPreference = "Stop"
 
 [string] $configuration = "Release"
 
+# output directory where nuget packages will be stored after build
+[string] $outputDirectory = ".\output\$configuration";
+
 # For now we expect nuget to be in this location.
 # Maybe it should be in GIT or downloaded from internet when build is made?
 [string] $nuget = "c:\nuget\4.4.0\nuget.exe"
