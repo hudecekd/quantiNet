@@ -36,7 +36,7 @@ Try
 
   # msbuild of .NET Standard uses output directory of project.
   # Do not know whether we can set path only for nuget package so we need to copy it from build folder
-  Copy-Item QuantiNET\Quanti.Utils\bin.S20\$configuration\Quanti.Utils.S20.*.nupkg $outputDirectory
+  Copy-Item QuantiNET\Quanti.Utils\bin.S20\$configuration\Quanti.Utils.S20.0.0.1.nupkg $outputDirectory
 
   Invoke-Expression "$nuget pack QuantiNET\Quanti.Utils\Quanti.Utils.csproj -OutputDirectory $outputDirectory -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
   Invoke-Expression "$nuget pack QuantiNET\Quanti.WPF.Utils\Quanti.WPF.Utils.csproj -OutputDirectory $outputDirectory -Prop Configuration=$configuration -Properties licenseUrl=$licenseUrl"
