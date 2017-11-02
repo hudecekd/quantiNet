@@ -12,13 +12,14 @@ namespace Quanti.Utils.Helpers
     /// <summary>
     /// Represents helper class for an enum type.
     /// </summary>
-    public static class EnumHelper
+    public static class EnumHelper<T>
+        where T : struct, IComparable, IFormattable, IConvertible
     {
         /// <summary>
         /// Represents localization of enum value.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public sealed class TextValue<T>
+        public sealed class TextValue
         {
             /// <summary>
             /// Represents value of enum type.
@@ -55,13 +56,14 @@ namespace Quanti.Utils.Helpers
         /// <param name="resourcesManager">Resource manager which contains texts which should be used to localize an enum values.</param>
         /// <param name="cultureInfo">Culture info to be used for localization.</param>
         /// <returns></returns>
-        public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, System.Globalization.CultureInfo cultureInfo) where T : struct, IComparable, IFormattable, IConvertible
+        public static IEnumerable<TextValue> GetLocalizations(ResourceManager resourcesManager, System.Globalization.CultureInfo cultureInfo)
         {
-            ArgumentChecker.ThrowIfNull(resourcesManager, nameof(resourcesManager));
-            ArgumentChecker.ThrowIfNull(cultureInfo, nameof(cultureInfo));
-            GenericTypeChecker.ThrowIfNotEnum<T>();
+            ArgumentChecker.Instance
+                .ThrowIfNull(resourcesManager, nameof(resourcesManager))
+                .ThrowIfNull(cultureInfo, nameof(cultureInfo))
+                .ThrowIfNotEnum<T>();
 
-            return GetLocalizations<T>(resourcesManager, defaultValueToIgnore: null, cultureInfo: cultureInfo);
+            return GetLocalizations(resourcesManager, defaultValueToIgnore: null, cultureInfo: cultureInfo);
         }
 
         /// <summary>
@@ -72,16 +74,17 @@ namespace Quanti.Utils.Helpers
         /// <param name="defaultValueToIgnore">Value to be filtered from return collection. This way null can be used instead default value.</param>
         /// <param name="cultureInfo">Culture for which to get localization text. If not present then current culture of thread is used.</param>
         /// <returns></returns>
-        public static IEnumerable<TextValue<T>> GetLocalizations<T>(ResourceManager resourcesManager, Nullable<T> defaultValueToIgnore = null, System.Globalization.CultureInfo cultureInfo = null) where T : struct, IComparable, IFormattable, IConvertible
+        public static IEnumerable<TextValue> GetLocalizations(ResourceManager resourcesManager, Nullable<T> defaultValueToIgnore = null, System.Globalization.CultureInfo cultureInfo = null)
         {
-            ArgumentChecker.ThrowIfNull(resourcesManager, nameof(resourcesManager));
-            GenericTypeChecker.ThrowIfNotEnum<T>();
+            ArgumentChecker.Instance
+                .ThrowIfNull(resourcesManager, nameof(resourcesManager))
+                .ThrowIfNotEnum<T>();
 
             var type = typeof(T);
             var prefix = type.Name;
             var values = Enum.GetValues(type);
 
-            var texts = new List<TextValue<T>>();
+            var texts = new List<TextValue>();
             foreach (T value in values)
             {
                 // default value should be filtered out
@@ -124,7 +127,7 @@ namespace Quanti.Utils.Helpers
                     text = name;
 #endif
 
-                texts.Add(new TextValue<T>(value, text));
+                texts.Add(new TextValue(value, text));
             }
 
             return texts.OrderBy(t => t.Text);
@@ -136,13 +139,13 @@ namespace Quanti.Utils.Helpers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IEnumerable<TextValue<T>> GetLocalizationsByDisplayAttribute<T>() where T : struct, IComparable, IFormattable, IConvertible
+        public static IEnumerable<TextValue> GetLocalizationsByDisplayAttribute()
         {
             GenericTypeChecker.ThrowIfNotEnum<T>();
 
             var type = typeof(T);
             var values = Enum.GetValues(type);
-            var texts = new List<TextValue<T>>();
+            var texts = new List<TextValue>();
             foreach (object objectValue in values)
             {
                 var enumValue = (Enum)objectValue;
@@ -152,7 +155,7 @@ namespace Quanti.Utils.Helpers
                 var displayAttribute = enumValue.GetAttribute<DisplayAttribute>();
                 var name = (displayAttribute is null) ? Enum.GetName(type, value) : displayAttribute.GetName();
 
-                texts.Add(new TextValue<T>(value, name));
+                texts.Add(new TextValue(value, name));
             }
 
             return texts;

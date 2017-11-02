@@ -38,7 +38,7 @@ namespace Quanti.Utils.UnitTests
         [TestMethod]
         public void TestMissingLocalization()
         {
-            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizations<TestEnum2Type>(Resources.ResourceManager);
+            var localizations = Quanti.Utils.Helpers.EnumHelper<TestEnum2Type>.GetLocalizations(Resources.ResourceManager);
             var localization = localizations.Single();
             Assert.IsTrue(localization.Text == localization.Value.ToString());
         }
@@ -46,7 +46,7 @@ namespace Quanti.Utils.UnitTests
         [TestMethod]
         public void TestCount()
         {
-            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizations<TestEnumType>(Resources.ResourceManager);
+            var localizations = Quanti.Utils.Helpers.EnumHelper<TestEnumType>.GetLocalizations(Resources.ResourceManager);
             Assert.IsTrue(localizations.Count() == Enum.GetValues(typeof(TestEnumType)).Length);
         }
 
@@ -58,7 +58,7 @@ namespace Quanti.Utils.UnitTests
         public void TestIgnoreDefaultValue()
         {
             var defaultValue = TestEnumType.None;
-            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizations<TestEnumType>(Resources.ResourceManager, defaultValue);
+            var localizations = Quanti.Utils.Helpers.EnumHelper<TestEnumType>.GetLocalizations(Resources.ResourceManager, defaultValue);
             Assert.IsTrue(localizations.Count() == Enum.GetValues(typeof(TestEnumType)).Length - 1);
             Assert.IsFalse(localizations.Any(l => l.Value == defaultValue));
         }
@@ -67,7 +67,7 @@ namespace Quanti.Utils.UnitTests
         public void TestCulture()
         {
             var cultureInfo = new CultureInfo("cs-Cz");
-            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizations<TestEnumType>(Resources.ResourceManager, cultureInfo);
+            var localizations = Quanti.Utils.Helpers.EnumHelper<TestEnumType>.GetLocalizations(Resources.ResourceManager, cultureInfo);
 
             // get localization for value we want to test
             var localization = localizations.Single(l => l.Value == TestEnumType.Value1);
@@ -82,7 +82,7 @@ namespace Quanti.Utils.UnitTests
         [TestMethod]
         public void TestDisplayAttribute()
         {
-            var localizations = Quanti.Utils.Helpers.EnumHelper.GetLocalizationsByDisplayAttribute<TestEnumDisplayAttributeType>();
+            var localizations = Quanti.Utils.Helpers.EnumHelper<TestEnumDisplayAttributeType>.GetLocalizationsByDisplayAttribute();
         }
 
         [TestMethod]

@@ -17,6 +17,7 @@ namespace Quanti.Utils
         /// <typeparam name="T"></typeparam>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ThrowIfNotEnum<T>()
+            where T : IComparable, IFormattable, IConvertible
         {
             if (!typeof(T).GetTypeInfo().IsEnum)
                 throw new InvalidOperationException($"Type '{typeof(T).FullName} is not an enum!");
