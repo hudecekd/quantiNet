@@ -18,7 +18,6 @@ namespace Quanti.Utils.Helpers
         /// <summary>
         /// Represents localization of enum value.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         public sealed class TextValue
         {
             /// <summary>
@@ -32,13 +31,13 @@ namespace Quanti.Utils.Helpers
 
             /// <summary>
             /// Creates object representing localization of value of enum type.
-            /// It can be created only by methods in <see cref="EnumHelper"/> class.
+            /// It can be created only by methods in <see cref="EnumHelper{T}"/> class.
             /// </summary>
             internal TextValue() { }
 
             /// <summary>
             /// Creates object representing localization of value of an enum type.
-            /// It can be created only by methods in <see cref="EnumHelper"/> class.
+            /// It can be created only by methods in <see cref="EnumHelper{T}"/> class.
             /// </summary>
             /// <param name="value"></param>
             /// <param name="text"></param>
@@ -52,7 +51,6 @@ namespace Quanti.Utils.Helpers
         /// <summary>
         /// Gets localized texts for enum values.
         /// </summary>
-        /// <typeparam name="T">Enum type for which values to get localized texts.</typeparam>
         /// <param name="resourcesManager">Resource manager which contains texts which should be used to localize an enum values.</param>
         /// <param name="cultureInfo">Culture info to be used for localization.</param>
         /// <returns></returns>
@@ -69,7 +67,6 @@ namespace Quanti.Utils.Helpers
         /// <summary>
         /// Gets localized texts for values of enum type by using specified instance of <see cref="ResourceManager"/>.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="resourcesManager"></param>
         /// <param name="defaultValueToIgnore">Value to be filtered from return collection. This way null can be used instead default value.</param>
         /// <param name="cultureInfo">Culture for which to get localization text. If not present then current culture of thread is used.</param>
@@ -137,7 +134,6 @@ namespace Quanti.Utils.Helpers
         /// Returns localization texts for an enum by examing each value for <see cref="DisplayAttribute"/>.
         /// If attribute is not available then name of a value is used instead.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static IEnumerable<TextValue> GetLocalizationsByDisplayAttribute()
         {
