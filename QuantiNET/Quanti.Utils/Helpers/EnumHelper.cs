@@ -23,11 +23,11 @@ namespace Quanti.Utils.Helpers
             /// <summary>
             /// Represents value of enum type.
             /// </summary>
-            public T Value { get; set; }
+            public T Value { get; internal set; }
             /// <summary>
             /// Localization of value of an enum type.
             /// </summary>
-            public string Text { get; set; }
+            public string Text { get; internal set; }
 
             /// <summary>
             /// Creates object representing localization of value of enum type.

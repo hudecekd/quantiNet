@@ -10,7 +10,8 @@ namespace Quanti.Utils
     public static class ArgumentChecker
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ThrowIfNull(object argument, string argumentName)
+        public static void ThrowIfNull<T>(T argument, string argumentName)
+            where T : class
         {
             if (argument == null)
                 throw new ArgumentNullException(argumentName);
